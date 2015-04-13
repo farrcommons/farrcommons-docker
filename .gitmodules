@@ -1,3 +1,6 @@
 [submodule "_src/ckan"]
 	path = _src/ckan
 	url = https://github.com/ckan/ckan.git
+[submodule "_src/ckanext-farrcommons_theme"]
+	path = _src/ckanext-farrcommons_theme
+	url = https://github.com/farrcommons/ckanext-farrcommons_theme
