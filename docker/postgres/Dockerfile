@@ -16,8 +16,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y install \
 
 # default credentials if none have been provided at runtime
 # you should at least set a secure passwords
-ENV CKAN_DB ckan
-ENV CKAN_USER ckan_user
+ENV CKAN_DB ckan_default
+ENV CKAN_USER ckan_default
 ENV CKAN_PASS ckan_pass
 
 ENV DATASTORE_DB datastore
@@ -34,6 +34,7 @@ RUN echo "host    all    all    0.0.0.0/0    md5" >> $PGMAIN/pg_hba.conf
 
 # Configure runit
 ADD ./svc /etc/service/
+ADD ./dump/ /etc/postgresql/dump/
 CMD ["/sbin/my_init"]
 
 VOLUME ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]

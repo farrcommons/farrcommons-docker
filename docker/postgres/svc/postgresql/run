@@ -32,6 +32,11 @@ if [[ ! -e "$PGDATA/db_configured" ]]; then
     setuser postgres createdb \
       -O $CKAN_USER $DATASTORE_DB -T template0  -E utf-8
 
+    #If there is a dump file the use this to populate initial db
+    if [[ -e /etc/postgresql/dump/pg_dump ]]; then
+        setuser postgres psql $CKAN_DB < /etc/postgresql/dump/pg_dump
+    fi
+
     # configure the permissions for the datastore
     setuser postgres psql \
       -q <<-EOF
@@ -58,6 +63,7 @@ if [[ ! -e "$PGDATA/db_configured" ]]; then
     ALTER DEFAULT PRIVILEGES FOR USER $CKAN_USER IN SCHEMA public
        GRANT SELECT ON TABLES TO $DATASTORE_USER;
 EOF
+
     # Database configured
     touch $PGDATA/db_configured
   }
