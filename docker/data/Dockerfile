@@ -16,6 +16,8 @@ RUN echo "postgres:x:103:107:PostgreSQL administrator,,,:/var/lib/postgresql:/bi
 RUN mkdir -p $PGDATA && chown -R postgres:postgres $PGDATA
 RUN mkdir -p $PGMAIN && chown -R postgres:postgres $PGMAIN
 
+ADD ./initial/ /
+
 CMD ["/sbin/my_init"]
 
 VOLUME ["/var/lib/ckan", "/etc/postgresql/9.3/main", "/var/lib/postgresql/9.3/main"]
