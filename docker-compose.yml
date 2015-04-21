@@ -12,7 +12,7 @@ postgres:
   volumes_from:
     - data
   environment:
-    - CKAN_PASS=
+    - CKAN_PASS
     - DATASTORE_PASS=datastore_pass
 
 solr:
